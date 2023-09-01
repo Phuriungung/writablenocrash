@@ -38,8 +38,8 @@ class cachedDraw: UIView {
         setNeedsDisplay()
         ctr = 0
         
-        path.move(to: pts[0])
-        path.addLine(to: pts[0])
+//        path.move(to: pts[0])
+//        path.addLine(to: pts[0])
         path.stroke()
         setNeedsDisplay()
         
@@ -48,7 +48,8 @@ class cachedDraw: UIView {
         path.stroke()
         
         ctr += 1
-        if ctr == 4 {
+        if pts.count == 5 {
+            print(pts)
             pts[3] = CGPoint(x: (pts[2].x + pts[4].x) / 2.0, y: (pts[2].y + pts[4].y) / 2.0)
             path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
             setNeedsDisplay()
@@ -82,25 +83,9 @@ class SmoothedDraw: UIView {
         //        path = UIBezierPath(roundedRect: rect, cornerRadius:10)
         path.lineWidth = 10.0 // Set the line width as needed
         path.lineCapStyle = .round
-        if ctr == 1 {
-            UIColor.red.setStroke()
-        }
         
-        if ctr == 2 {
-            UIColor.green.setStroke()
-        }
-        
-        if ctr == 3 {
-            UIColor.yellow.setStroke()
-        }
-        
-        if ctr == 4 {
-            UIColor.white.setStroke()
-        }
-        
-        if ctr == 0 {
-            UIColor.brown.setStroke()
-        }
+        UIColor.red.setStroke()
+       
         
         path.stroke()
         
@@ -159,7 +144,7 @@ class SmoothedDraw: UIView {
                 for i in 0...4 {
                     savedpts.append(pts[i])
                 }
-                print(savedpts)
+//                print(savedpts)
                 cachedDrawView.pts = savedpts
                 
                 
@@ -217,29 +202,27 @@ struct RepresentView: UIViewRepresentable {
         
         
         
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 2000))
+        
         var smoothDrawInstance = SmoothedDraw()
         smoothDrawInstance.backgroundColor = UIColor(red: 0, green: 0, blue: 0.5, alpha: 0.5)
-        
-        smoothDrawInstance.frame = CGRect(x: 100, y: 200, width: 500, height: 2000)
-        
-        var initialView = smoothDrawInstance
-        
-        //        initialView.addSubview(smoothDrawInstance)
+        smoothDrawInstance.frame = CGRect(x: 0, y: 0, width: 500, height: 2000)
         
         var cachedDrawInstance = cachedDraw(pts: smoothDrawInstance.savedpts)
         
-        // Add cachedDraw as a subview of smoothDrawInstance
-        smoothDrawInstance.addSubview(cachedDrawInstance)
+        // Add cachedDrawInstance as a subview of containerView
+        containerView.addSubview(cachedDrawInstance)
         
-        // Set cachedDraw's frame (you may need to adjust this)
+        // Set cachedDrawInstance's frame (you may need to adjust this)
         cachedDrawInstance.frame = CGRect(x: 0, y: 0, width: 500, height: 2000)
         
-        // Add smoothDrawInstance as a subview of initialView
-        initialView.addSubview(smoothDrawInstance)
+        // Add smoothDrawInstance as a subview of containerView
+        containerView.addSubview(smoothDrawInstance)
         
+        // Set cachedDrawInstance's pts property with savedpts
+        cachedDrawInstance.pts = smoothDrawInstance.savedpts
         
-        
-        return initialView
+        return containerView
         
     }
     
