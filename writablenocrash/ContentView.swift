@@ -75,6 +75,7 @@ class SmoothedDraw: UIView {
     var ctr = 0
     var pts = [CGPoint](repeating: .zero, count: 5)
     var savedpts: [CGPoint] = []
+    private var incrementalImage: UIImage?
     
     
     var whitePath = UIBezierPath()
@@ -82,6 +83,7 @@ class SmoothedDraw: UIView {
     //    var cachedDrawView = cachedDraw(pts: [])
     
     override func draw(_ rect: CGRect) {
+        incrementalImage?.draw(in: rect)
         //        path = UIBezierPath(roundedRect: rect, cornerRadius:10)
         path.lineWidth = 10.0 // Set the line width as needed
         path.lineCapStyle = .round
@@ -105,7 +107,7 @@ class SmoothedDraw: UIView {
         //        path.move(to: CGPoint(x: 900, y: 500))
         //        path.addLine(to: CGPoint(x: 500, y: 900))
         path.stroke()
-        UIColor.blue.setStroke()
+        UIColor.red.setStroke()
         path2.stroke()
         setNeedsDisplay()
         
@@ -155,7 +157,7 @@ class SmoothedDraw: UIView {
                 path.addLine(to: pts[1])
                 path.stroke()
                 setNeedsDisplay()
-                print("1")
+//                print("1")
             }
             
             if ctr == 2 {
@@ -164,7 +166,7 @@ class SmoothedDraw: UIView {
                 path.addQuadCurve(to: pts[2], controlPoint: pts[1])
                 path.stroke()
                 setNeedsDisplay()
-                print("2")
+//                print("2")
             }
             
             
@@ -174,7 +176,7 @@ class SmoothedDraw: UIView {
                 path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
                 path.stroke()
                 setNeedsDisplay()
-                print("3")
+//                print("3")
             }
             
             if ctr == 4 {
@@ -185,7 +187,7 @@ class SmoothedDraw: UIView {
 //                path2.addLine(to: CGPoint(x: 500, y: 900))
                 path2.stroke()
                 setNeedsDisplay()
-                print("4")
+//                print("4")
                 
                 
                 
@@ -211,7 +213,7 @@ class SmoothedDraw: UIView {
                 
                 pts[0] = pts[3]
                 pts[1] = pts[4]
-                print("5")
+//                print("5")
                 ctr = 1
                 
             }
@@ -232,7 +234,7 @@ class SmoothedDraw: UIView {
             path2.addLine(to: pts[1])
             path2.stroke()
             setNeedsDisplay()
-            print("e1")
+//            print("e1")
         }
         
         if ctr == 2 {
@@ -240,7 +242,7 @@ class SmoothedDraw: UIView {
             path2.addQuadCurve(to: pts[2], controlPoint: pts[1])
             path2.stroke()
             setNeedsDisplay()
-            print("e2")
+//            print("e2")
         }
         
         if ctr == 3 {
@@ -248,12 +250,30 @@ class SmoothedDraw: UIView {
             path2.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
             path2.stroke()
             setNeedsDisplay()
-            print("e3")
+//            print("e3")
         }
+        drawBitmap()
+        path2.removeAllPoints()
         
         ctr = 0
 //        path.removeAllPoints()
     }
+    
+    private func drawBitmap() {
+            UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
+            UIColor.black.setStroke()
+            
+            if incrementalImage == nil { // first draw; paint background white by ...
+                let rectPath = UIBezierPath(rect: bounds)
+                UIColor.white.setFill()
+                rectPath.fill() // filling it with white
+            }
+            
+            incrementalImage?.draw(at: CGPoint.zero)
+            path2.stroke()
+            incrementalImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+        }
     
 }
 
@@ -308,7 +328,7 @@ struct RepresentView: UIViewRepresentable {
     }
     
     private func buttonTapped() {
-        print("Button tapped!")
+//        print("Button tapped!")
         // You can add your button's action code here
     }
     
