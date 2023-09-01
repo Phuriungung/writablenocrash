@@ -8,6 +8,66 @@
 import SwiftUI
 import UIKit
 
+class cachedDraw: UIView {
+    var path = UIBezierPath()
+    var ctr = 0
+    var pts: [CGPoint]
+    
+    init(path: UIBezierPath = UIBezierPath(), ctr: Int = 0, pts: [CGPoint]) {
+        self.path = path
+        self.ctr = ctr
+        self.pts = pts
+        super.init(frame: CGRect.zero)
+    }
+    
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    
+    override func draw(_ rect: CGRect) {
+        path.lineWidth = 10.0 // Set the line width as needed
+        path.lineCapStyle = .round
+        UIColor.yellow.setStroke()
+        path.stroke()
+        
+        setNeedsDisplay()
+        ctr = 0
+        
+        path.move(to: pts[0])
+        path.addLine(to: pts[0])
+        path.stroke()
+        setNeedsDisplay()
+        
+        
+        
+        path.stroke()
+        
+        ctr += 1
+        if ctr == 4 {
+            pts[3] = CGPoint(x: (pts[2].x + pts[4].x) / 2.0, y: (pts[2].y + pts[4].y) / 2.0)
+            path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
+            setNeedsDisplay()
+            
+            pts[0] = pts[3]
+            pts[1] = pts[4]
+            ctr = 1
+            path.stroke()
+            setNeedsDisplay()
+        }
+    }
+    
+}
+
+
+
+
+
+
 class SmoothedDraw: UIView {
     var path = UIBezierPath()
     var ctr = 0
@@ -16,12 +76,12 @@ class SmoothedDraw: UIView {
     
     var whitePath = UIBezierPath()
     
+    var cachedDrawView = cachedDraw(pts: [])
+    
     override func draw(_ rect: CGRect) {
         //        path = UIBezierPath(roundedRect: rect, cornerRadius:10)
-        
         path.lineWidth = 10.0 // Set the line width as needed
         path.lineCapStyle = .round
-        
         if ctr == 1 {
             UIColor.red.setStroke()
         }
@@ -43,12 +103,6 @@ class SmoothedDraw: UIView {
         }
         
         path.stroke()
-        
-        
-        
-        
-        
-        
         
     }
     
@@ -77,16 +131,12 @@ class SmoothedDraw: UIView {
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        
         path.stroke()
-//        print(touches)
-        
+        //        print(touches)
         if let touch = touches.first {
             let p = touch.location(in: self)
             ctr += 1
             pts[Int(ctr)] = p
-            
             //            if ctr == 1 {
             //                path.move(to: pts[0])
             //                path.addLine(to: pts[1])
@@ -106,24 +156,23 @@ class SmoothedDraw: UIView {
                 path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
                 setNeedsDisplay()
                 
+                for i in 0...4 {
+                    savedpts.append(pts[i])
+                }
+                print(savedpts)
+                cachedDrawView.pts = savedpts
+                
                 
                 pts[0] = pts[3]
                 pts[1] = pts[4]
                 ctr = 1
                 path.stroke()
                 setNeedsDisplay()
-                
-                
-            
-                
-                
-                
             }
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         ctr = 0
     }
     
@@ -176,6 +225,18 @@ struct RepresentView: UIViewRepresentable {
         var initialView = smoothDrawInstance
         
         //        initialView.addSubview(smoothDrawInstance)
+        
+        var cachedDrawInstance = cachedDraw(pts: smoothDrawInstance.savedpts)
+        
+        // Add cachedDraw as a subview of smoothDrawInstance
+        smoothDrawInstance.addSubview(cachedDrawInstance)
+        
+        // Set cachedDraw's frame (you may need to adjust this)
+        cachedDrawInstance.frame = CGRect(x: 0, y: 0, width: 500, height: 2000)
+        
+        // Add smoothDrawInstance as a subview of initialView
+        initialView.addSubview(smoothDrawInstance)
+        
         
         
         return initialView
