@@ -379,6 +379,7 @@ struct ScrollViewWrapper: UIViewRepresentable {
 struct UIScrollViewWrapper<Content: View>: UIViewControllerRepresentable {
     
     @Binding var isScrollEnabled: Bool
+    @Binding var isPageEnabled: Bool
     
     var content: () -> Content
     
@@ -386,8 +387,9 @@ struct UIScrollViewWrapper<Content: View>: UIViewControllerRepresentable {
 //        self.content = content
 //    }
     
-    init(isScrollEnabled: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) {
+    init(isScrollEnabled: Binding<Bool>, isPageEnabled: Binding<Bool>,  @ViewBuilder content: @escaping () -> Content) {
             self._isScrollEnabled = isScrollEnabled
+        self._isPageEnabled = isPageEnabled
             self.content = content
         }
     
@@ -395,12 +397,14 @@ struct UIScrollViewWrapper<Content: View>: UIViewControllerRepresentable {
         let vc = UIScrollViewViewController()
         vc.hostingController.rootView = AnyView(self.content())
         vc.scrollView.isScrollEnabled = isScrollEnabled
+        vc.scrollView.isPagingEnabled = isPageEnabled
         return vc
     }
     
     func updateUIViewController(_ viewController: UIScrollViewViewController, context: Context) {
         viewController.hostingController.rootView = AnyView(self.content())
         viewController.scrollView.isScrollEnabled = isScrollEnabled
+        viewController.scrollView.isPagingEnabled = isPageEnabled
     }
 }
 
@@ -408,7 +412,7 @@ class UIScrollViewViewController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
         let v = UIScrollView()
-        v.isPagingEnabled = true
+        v.isPagingEnabled = false
         v.isScrollEnabled = false
         return v
     }()
@@ -651,21 +655,33 @@ class ScrollDraw: UIScrollView {
 struct ContentView: View {
     
     @State private var isScrollEnabled = true
+    @State private var isPageEnabled = true
     
     var body: some View {
         VStack {
-            Button(action: {
-                isScrollEnabled.toggle()
-            }) {
-                Text(isScrollEnabled ? "Disable Scrolling" : "Enable Scrolling")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            HStack {
+                Button(action: {
+                    isScrollEnabled.toggle()
+                }) {
+                    Text(isScrollEnabled ? "Disable Scrolling" : "Enable Scrolling")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                Button(action: {
+                    isPageEnabled.toggle()
+                }) {
+                    Text(isPageEnabled ? "Disable Paging" : "Enable Paging")
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
             
             
-            UIScrollViewWrapper(isScrollEnabled: $isScrollEnabled) {
+            UIScrollViewWrapper(isScrollEnabled: $isScrollEnabled, isPageEnabled: $isPageEnabled) {
                 VStack {
                     ForEach(0..<100, id: \.self) { obj in
                         Text("\(obj)")
