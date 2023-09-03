@@ -11,6 +11,7 @@
 		508728192AA0A627001FDC73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508728182AA0A627001FDC73 /* ContentView.swift */; };
 		5087281B2AA0A628001FDC73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5087281A2AA0A628001FDC73 /* Assets.xcassets */; };
 		5087281E2AA0A628001FDC73 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5087281D2AA0A628001FDC73 /* Preview Assets.xcassets */; };
+		50EE50EC2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE50EB2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		508728182AA0A627001FDC73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5087281A2AA0A628001FDC73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5087281D2AA0A628001FDC73 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		50EE50EB2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIembedUIScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				508728162AA0A627001FDC73 /* writablenocrashApp.swift */,
 				508728182AA0A627001FDC73 /* ContentView.swift */,
+				50EE50EB2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift */,
 				5087281A2AA0A628001FDC73 /* Assets.xcassets */,
 				5087281C2AA0A628001FDC73 /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			files = (
 				508728192AA0A627001FDC73 /* ContentView.swift in Sources */,
 				508728172AA0A627001FDC73 /* writablenocrashApp.swift in Sources */,
+				50EE50EC2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

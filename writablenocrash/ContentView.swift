@@ -443,7 +443,7 @@ class UIScrollViewViewController: UIViewController {
     
 }
 
-class ScrollDraw: UIScrollView {
+class ScrollDraw: UIView {
     
     var path = UIBezierPath()
     var path2 = UIBezierPath()
