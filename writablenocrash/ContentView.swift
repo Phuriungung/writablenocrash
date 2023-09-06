@@ -285,7 +285,7 @@ struct ContentView: View {
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
                 .frame(width: 200, height: 500)
-            
+            Text("HI")
         }
         .padding()
     }
