@@ -20,6 +20,7 @@ struct SwiftUIContentView_Previews: PreviewProvider {
             UIScrollViewRepresentableWrapper()
             SwiftUIContentView()
             Text("Hi")
+            Text("learn")
         }
         
     }
