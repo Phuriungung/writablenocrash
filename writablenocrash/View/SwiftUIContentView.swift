@@ -19,6 +19,7 @@ struct SwiftUIContentView_Previews: PreviewProvider {
         VStack {
             UIScrollViewRepresentableWrapper()
             SwiftUIContentView()
+            Text("Hi")
         }
         
     }
