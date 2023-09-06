@@ -12,6 +12,9 @@
 		5087281B2AA0A628001FDC73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5087281A2AA0A628001FDC73 /* Assets.xcassets */; };
 		5087281E2AA0A628001FDC73 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5087281D2AA0A628001FDC73 /* Preview Assets.xcassets */; };
 		50EE50EC2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE50EB2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift */; };
+		50F98A472AA76F7C006D96F2 /* SwiftUIContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F98A462AA76F7C006D96F2 /* SwiftUIContentView.swift */; };
+		50F98A492AA77016006D96F2 /* SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F98A482AA77016006D96F2 /* SwiftUIApp.swift */; };
+		50F98A4B2AA770DA006D96F2 /* UIRepresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F98A4A2AA770DA006D96F2 /* UIRepresentableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +24,9 @@
 		5087281A2AA0A628001FDC73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5087281D2AA0A628001FDC73 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		50EE50EB2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIembedUIScrollView.swift; sourceTree = "<group>"; };
+		50F98A462AA76F7C006D96F2 /* SwiftUIContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIContentView.swift; sourceTree = "<group>"; };
+		50F98A482AA77016006D96F2 /* SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIApp.swift; sourceTree = "<group>"; };
+		50F98A4A2AA770DA006D96F2 /* UIRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRepresentableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,10 +59,9 @@
 		508728152AA0A627001FDC73 /* writablenocrash */ = {
 			isa = PBXGroup;
 			children = (
-				508728162AA0A627001FDC73 /* writablenocrashApp.swift */,
-				508728182AA0A627001FDC73 /* ContentView.swift */,
-				50EE50EB2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift */,
-				5087281A2AA0A628001FDC73 /* Assets.xcassets */,
+				50F98A4C2AA77107006D96F2 /* Archive */,
+				50F98A4D2AA7712A006D96F2 /* View */,
+				50F98A4E2AA77152006D96F2 /* App */,
 				5087281C2AA0A628001FDC73 /* Preview Content */,
 			);
 			path = writablenocrash;
@@ -65,9 +70,37 @@
 		5087281C2AA0A628001FDC73 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				5087281A2AA0A628001FDC73 /* Assets.xcassets */,
 				5087281D2AA0A628001FDC73 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		50F98A4C2AA77107006D96F2 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				508728162AA0A627001FDC73 /* writablenocrashApp.swift */,
+				508728182AA0A627001FDC73 /* ContentView.swift */,
+				50EE50EB2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
+		50F98A4D2AA7712A006D96F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				50F98A462AA76F7C006D96F2 /* SwiftUIContentView.swift */,
+				50F98A4A2AA770DA006D96F2 /* UIRepresentableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50F98A4E2AA77152006D96F2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				50F98A482AA77016006D96F2 /* SwiftUIApp.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +173,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50F98A472AA76F7C006D96F2 /* SwiftUIContentView.swift in Sources */,
 				508728192AA0A627001FDC73 /* ContentView.swift in Sources */,
+				50F98A492AA77016006D96F2 /* SwiftUIApp.swift in Sources */,
+				50F98A4B2AA770DA006D96F2 /* UIRepresentableView.swift in Sources */,
 				508728172AA0A627001FDC73 /* writablenocrashApp.swift in Sources */,
 				50EE50EC2AA452B6005BE371 /* SwiftUIembedUIScrollView.swift in Sources */,
 			);
